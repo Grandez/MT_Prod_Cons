@@ -1,0 +1,16 @@
+es\mpt\sgtic\geiser\prodcons\core\ProdConsProducer.class
+es\mpt\sgtic\geiser\prodcons\logging\QLoggerCons.class
+es\mpt\sgtic\geiser\prodcons\core\ProdConsMotor.class
+es\mpt\sgtic\geiser\prodcons\config\ProdConsConfigAsync.class
+es\mpt\sgtic\geiser\prod\ProdConsConfigJpa.class
+es\mpt\sgtic\geiser\prodcons\beans\Color.class
+es\mpt\sgtic\geiser\prod\ProdConsConfigExecutor.class
+es\mpt\sgtic\geiser\prodcons\interfaces\IProdConsLogger.class
+es\mpt\sgtic\geiser\prodcons\config\ProdConsConfig.class
+es\mpt\sgtic\geiser\prodcons\core\ProdConsConsumer.class
+es\mpt\sgtic\geiser\prodcons\core\ProdConsTimer.class
+es\mpt\sgtic\geiser\prodcons\interfaces\IProdConsConfig.class
+es\mpt\sgtic\geiser\prodcons\beans\ResultThread.class
+es\mpt\sgtic\geiser\prodcons\beans\ResultGlobal.class
+es\mpt\sgtic\geiser\prodcons\core\ProdConsBase.class
+es\mpt\sgtic\geiser\prodcons\logging\QLogger.class

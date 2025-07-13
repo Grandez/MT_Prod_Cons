@@ -1,0 +1,32 @@
+{
+    "id": "BE7187C7",
+    "path": "P:/geiser_4.0.0/zgeiser-tools/prod-cons/src/main/resources/doc/balanceo.qmd",
+    "project_path": "balanceo.qmd",
+    "type": "quarto_markdown",
+    "hash": "745401074",
+    "contents": "",
+    "dirty": false,
+    "created": 1741432408715.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "rmdVisualMode": "true",
+        "rmdVisualWrapConfigured": "true",
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "40,0",
+        "scrollLine": "16",
+        "docOutlineVisible": "0",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "1712:952"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1741596110,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1741596110457,
+    "read_only": false,
+    "read_only_alternatives": []
+}

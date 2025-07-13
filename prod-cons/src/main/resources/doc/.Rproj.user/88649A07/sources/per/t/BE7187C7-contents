@@ -1,0 +1,48 @@
+---
+title: "autobalanceo"
+format: html
+---
+
+## Introduccion
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+El sistema esta determinado por cuatro variables:
+
+-   El tiempo maximo de ejecución (timer)
+-   El número de elementos a procesar (lote)
+-   El número de procesos en paralelo (threads)
+-   El número de transacciones (chunk)
+
+## Chunks
+
+![](img/chunk_vs_tiempo.png)
+
+| Chunk | Tiempo | Total |
+|------:|-------:|------:|
+|     1 |      1 |   100 |
+|     2 |      1 |    50 |
+|     3 |    1,5 |    75 |
+|     4 |      2 |    50 |
+|     5 |      4 |    80 |
+
+A partir de bloques de 5 elementos por transacción el sistema empieza a degradarse, por otro lado, cuando se usa un chunk de 4, que logicamente cuesta un tiempo ligeramente superior al requerido para los chunk de 3, en total realiza menos commits lo cual redunda en un menor tiempo de proceso.
+
+Por lo que la decision lógica, en este supuesto, sería utilizar un chunk = 4 que nos ofrecería un tiempo medio de 0,5 ut. por elemento procesado, la mitad de tiempo o, a la inversa, el doble de capacidad de proceso con respecto al hecho de no usar chunks (chunk = 1)
+
+> Que optimizar el uso de transacciones optimiza el proceso es un hecho objetivo y conocido, pero esta optimización no es lineal, depende de varios factores externos e internos al proceso, pudiendose demostrar empiricamente que, a partir de cierto volumen, el proceso empieza degenerar. Aunque existen algoritmos y fórmulas para estimar cual es teoricamente el tamaño óptimo, en determinadas situaciones, es mas rápido realizar ese analisis maualmente, como en este ejemplo, mas, si cabe, cuando el proceso debe ser auditado y es susceptible a cambios en el tiempo
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).

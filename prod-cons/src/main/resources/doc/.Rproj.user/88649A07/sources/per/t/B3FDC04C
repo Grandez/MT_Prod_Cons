@@ -1,0 +1,29 @@
+{
+    "id": "B3FDC04C",
+    "path": "P:/geiser_4.0.0/zgeiser-tools/prod-cons/src/main/resources/doc/doc.qmd",
+    "project_path": "doc.qmd",
+    "type": "quarto_markdown",
+    "hash": "720793783",
+    "contents": "",
+    "dirty": false,
+    "created": 1741432274677.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "rmdVisualMode": "true",
+        "rmdVisualWrapConfigured": "true",
+        "source_window_id": "",
+        "Source": "Source",
+        "docOutlineVisible": "1",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "22:0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1741432257,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1741432257,
+    "read_only": false,
+    "read_only_alternatives": []
+}
