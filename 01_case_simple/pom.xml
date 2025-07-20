@@ -9,8 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <groupId>com.sdp.poc.threading</groupId>
-    <artifactId>matrix</artifactId>
+    <artifactId>01_case_simple</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -19,14 +18,14 @@
     </properties>
 
     <dependencies>
+       <dependency>
+           <groupId>com.sdp.poc</groupId>
+           <artifactId>base</artifactId>
+           <version>1.0.0</version>
+       </dependency>
         <dependency>
-            <groupId>com.sdp.poc</groupId>
-            <artifactId>base</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sdp.poc</groupId>
-            <artifactId>motorLatch</artifactId>
+            <groupId>com.sdp.poc.threading</groupId>
+            <artifactId>matrix</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
@@ -42,7 +41,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.sdp.poc.threading.threading.matrix.Matrix</mainClass>
+                            <mainClass>matrix.threading.com.sdp.poc.threading.Matrix</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -50,28 +49,28 @@
 
             <!-- JAR NO FAT, necesita el ClassPath -->
             <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-assembly-plugin</artifactId>
-               <version>3.6.0</version>
-               <configuration>
-                   <descriptorRefs>
-                       <descriptorRef>jar-with-dependencies</descriptorRef>
-                   </descriptorRefs>
-                   <archive>
-                       <manifest>
-                           <mainClass>com.sdp.poc.threading.threading.matrix.Matrix</mainClass>
-                       </manifest>
-                   </archive>
-               </configuration>
-               <executions>
-                   <execution>
-                       <id>crear-fat-jar</id>
-                       <phase>package</phase>
-                       <goals>
-                           <goal>single</goal>
-                       </goals>
-                   </execution>
-               </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>matrix.threading.com.sdp.poc.threading.Matrix</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>crear-fat-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
