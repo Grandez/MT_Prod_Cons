@@ -6,12 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="motor" />
-        <module name="01_case_simple" />
-        <module name="matrix" />
-        <module name="motor (1)" />
+        <module name="motorLatch" />
         <module name="base" />
+        <module name="01_case_simple" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="matrix" target="1.8" />
+      <module name="motor" target="1.8" />
+      <module name="motor (1)" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

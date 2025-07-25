@@ -4,8 +4,9 @@ import com.sdp.poc.threading.base.config.CLP;
 import com.sdp.poc.threading.base.config.CLP_Parameter;
 import com.sdp.poc.threading.base.config.CLP_TYPE;
 import com.sdp.poc.threading.simple.prodcons.Consumer;
+import com.sdp.poc.threading.simple.prodcons.Logger;
 import com.sdp.poc.threading.simple.prodcons.Productor;
-import com.sdp.poc.threading.core.Motor;
+import com.sdp.poc.threading.test.core.Motor;
 
 import java.util.*;
 
@@ -18,13 +19,12 @@ public class Simple {
     }
     private void run(String[] args) {
         Properties props = parseParms(args);
+        props.put("appName", "simple");
         CA ca = CA.getInstance();
         ca.setItems((String) props.get("items"));
-        ca.setCustomProps(props);
 
-        Motor motor = new Motor("latch");
-
-        motor.run(ca, Productor.class, Consumer.class);
+        Motor motor = new Motor(props);
+        motor.run(Productor.class, Consumer.class, Logger.class);
     }
     private Properties parseParms(String[] args) {
         Map<String, CLP_Parameter> options = new HashMap<>();

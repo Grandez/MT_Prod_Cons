@@ -11,8 +11,7 @@
 
     <modules>
         <module>base</module>
-        <module>motorLatch</module>
-        <module>matrix</module>
+        <module>MotorLatch</module>
         <module>01_case_simple</module>
     </modules>
 
@@ -23,11 +22,13 @@
     </properties>
 
     <dependencies>
+<!--
         <dependency>
             <groupId>com.sdp.poc</groupId>
             <artifactId>base</artifactId>
             <version>1.0.0</version>
         </dependency>
+-->
     </dependencies>
 
 </project>

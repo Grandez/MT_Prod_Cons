@@ -1,14 +1,20 @@
 package com.sdp.poc.threading.simple.prodcons;
 
 import com.sdp.poc.threading.simple.base.CA;
-import com.sdp.poc.threading.interfaces.IProducer;
+import com.sdp.poc.threading.interfaces.IMTProducer;
 
-public class Productor implements IProducer {
+public class Productor implements IMTProducer {
+    CA ca;
+    int last = 0;
+    int max = 5;
+    public Productor() {
+        ca = CA.getInstance();
+        // max = ca.getItems();
+    }
     @Override
-    public void run() {
-        CA ca = CA.getInstance();
-        for (int count = 0; count < ca.getItems(); count++) {
-            ca.qdat.put((long) count);
-        }
+    public Long producir() {
+        last++;
+        if (last > max) return null;
+        return last + 0L;
     }
 }

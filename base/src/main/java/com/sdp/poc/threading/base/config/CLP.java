@@ -1,6 +1,6 @@
 package com.sdp.poc.threading.base.config;
 
-import com.sdp.poc.threading.base.msg.Msg;
+import com.sdp.poc.threading.base.msg.LoggerCon;
 
 import java.util.Map;
 import java.util.Properties;
@@ -9,7 +9,7 @@ public class CLP {
     public static Properties parseParms(String[] args, Map<String, CLP_Parameter> options) {
         Properties props = new Properties();
         for (int i = 0; i < args.length; i++) {
-            if (args[i].charAt(0) != '-') Msg.error(4, "Parametro invalido: " + args[i]);
+            if (args[i].charAt(0) != '-') LoggerCon.error(4, "Parametro invalido: " + args[i]);
             String parm = args[i].substring(1);
 
             // Control de ayuda
@@ -19,7 +19,7 @@ public class CLP {
             }
 
             CLP_Parameter option = options.get(parm);
-            if (option == null) Msg.error(4, "Parametro invalido: " + args[i]);
+            if (option == null) LoggerCon.error(4, "Parametro invalido: " + args[i]);
 
             // Control de argumento valido
             parseParm(++i, args, option, props);
@@ -27,7 +27,7 @@ public class CLP {
         return props;
     }
     private static void parseParm(int idx, String[] args, CLP_Parameter parm, Properties props) {
-        if (idx >= args.length) Msg.error(4, "Falta el valor para el parametro: " + args[idx-1]);
+        if (idx >= args.length) LoggerCon.error(4, "Falta el valor para el parametro: " + args[idx-1]);
         switch (parm.type) {
             case INT:  props.put(parm.name, checkInt(args, idx)); break;
             case PINT: props.put(parm.name, checkPInt(args, idx)); break;
@@ -38,13 +38,13 @@ public class CLP {
         try {
             return Integer.parseInt(args[idx]);
         } catch (NumberFormatException ex) {
-            Msg.error(4, "El valor para el parametro: " + args[idx-1] + ".No es entero");
+            LoggerCon.error(4, "El valor para el parametro: " + args[idx-1] + ".No es entero");
         }
         return 0;
     }
     private static int checkPInt(String[] args, int idx) {
        int value = checkInt(args, idx);
-       if (value < 1) Msg.error(4, "El valor para el parametro: " + args[idx-1] + ".No es valido");
+       if (value < 1) LoggerCon.error(4, "El valor para el parametro: " + args[idx-1] + ".No es valido");
        return value;
     }
 

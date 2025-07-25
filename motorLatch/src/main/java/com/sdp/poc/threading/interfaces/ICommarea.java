@@ -9,7 +9,8 @@ public interface ICommarea {
     public int getTimeout   ();
 
     public PriorityBlockingQueue<Long> getQueue();
-
+    public LinkedBlockingQueue<String> getQLog();
     public void setNumThreads(int threads);
     public void setTimeout   (int timeout);
+    public void setCustomConfiguration(Properties props);
 }

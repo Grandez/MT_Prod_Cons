@@ -6,7 +6,7 @@ import java.util.concurrent.PriorityBlockingQueue;
 
 public class CAMotor {
     String name = "motor";
-    int threads;
+    int threads = 1;
     int timeout = 0;
     int chunk = 0;
 
@@ -17,23 +17,28 @@ public class CAMotor {
     public  static final String SEP  = ":";  // Separador de valores en CLP
     public  static final String TOK  = ";";  // Separador de campos en mensajes
 
-    public PriorityBlockingQueue<Long> qdat = new PriorityBlockingQueue<Long>();
-//    public LinkedBlockingQueue<String> qlog = new LinkedBlockingQueue<>();
+    public static PriorityBlockingQueue<Long> qdat = new PriorityBlockingQueue<Long>();
+    public static LinkedBlockingQueue<String> qlog = new LinkedBlockingQueue<String>();
 
     private Properties customProps = new Properties();
 
     private CAMotor() {}
-    private static class ConfigInner      { private static final CAMotor INSTANCE = new CAMotor(); }
+    private static class ConfigInner      {
+        private static final CAMotor INSTANCE = new CAMotor();
+    }
     public  static CAMotor getInstance() { return CAMotor.ConfigInner.INSTANCE; }
+    public  static CAMotor getCustomInstance() {
+        return CAMotor.ConfigInner.INSTANCE;
+    }
 
     public void setNumThreads(int threads) { this.threads = threads; }
     public void setTimeout   (int timeout) { this.timeout = timeout; }
-    public void setCustomProps(Properties props) { this.customProps = props; }
 
     public int getNumThreads() { return threads; }
     public int getTimeout   () { return timeout; }
+
     public Properties getCustomProps() {return customProps; }
     public PriorityBlockingQueue<Long> getQueue() { return qdat; }
-//    public LinkedBlockingQueue<String> getQLog() { return qlog; }
-
+    public LinkedBlockingQueue<String> getQLog()  { return qlog; }
+    public void setCustomProps(Properties props) { this.customProps = props; }
 }

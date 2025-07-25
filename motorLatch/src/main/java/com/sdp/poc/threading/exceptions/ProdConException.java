@@ -1,7 +1,7 @@
 package com.sdp.poc.threading.exceptions;
 
 
-import com.sdp.poc.threading.threading.motor.tools.Messages;
+import com.sdp.poc.threading.tools.Messages;
 
 public class ProdConException extends Exception {
     int code;

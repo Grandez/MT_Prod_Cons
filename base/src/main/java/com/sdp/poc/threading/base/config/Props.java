@@ -15,7 +15,7 @@ public class Props {
         try {
             props.load(new FileInputStream(appConfigPath));
         } catch (IOException e) {
-            Logger2.warning("Props: No se ha podido cargar el fichero de propiedades: " + basename + ".properties");
+            Logger2.warning("Props: No se ha podido cargar el fichero de propiedades: " + basename);
             Logger2.warning("Props: " + e.getLocalizedMessage());
         }
         return props;

@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>01_case_simple</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -23,12 +24,14 @@
            <artifactId>base</artifactId>
            <version>1.0.0</version>
        </dependency>
+<!--
         <dependency>
-            <groupId>com.sdp.poc.threading</groupId>
-            <artifactId>matrix</artifactId>
+            <groupId>com.sdp.poc</groupId>
+            <artifactId>MotorLatch</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
+-->
     </dependencies>
 
     <build>
@@ -41,7 +44,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>matrix.threading.com.sdp.poc.threading.Matrix</mainClass>
+                            <mainClass>com.sdp.poc.threading.simple.Simple</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -58,7 +61,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>matrix.threading.com.sdp.poc.threading.Matrix</mainClass>
+                            <mainClass>com.sdp.poc.threading.simple.Simple</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

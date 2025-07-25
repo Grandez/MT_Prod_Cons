@@ -1,11 +1,12 @@
 package com.sdp.poc.threading.simple.base;
+
+import com.sdp.poc.threading.config.Commarea;
+import com.sdp.poc.threading.interfaces.ICommarea;
+
 /**
  * Clase contenedora de la informacion necesaria para los productores y consumidores
  * Hereda de Commarea que contiene la informacion necesaria para el motor de threading
  */
-
-import com.sdp.poc.threading.config.Commarea;
-import com.sdp.poc.threading.interfaces.ICommarea;
 
 public class CA extends Commarea implements ICommarea {
 

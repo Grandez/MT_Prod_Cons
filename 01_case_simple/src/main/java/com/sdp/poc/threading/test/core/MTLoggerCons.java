@@ -1,15 +1,18 @@
-package com.sdp.poc.threading.core;
+package com.sdp.poc.threading.test.core;
 /**
  * Generador de Logs
  * Lee de la cola y los escribe donde se decida
  * El proceso acabara cuando se reciba un mensaje tipo -1
  */
 
+import com.sdp.poc.threading.base.files.MFiles;
 import com.sdp.poc.threading.base.msg.Color;
-import com.sdp.poc.threading.config.CAMotor;
 import com.sdp.poc.threading.interfaces.ILogger;
+import com.sdp.poc.threading.test.interfaces.IMTLogger;
 
-import java.io.PrintStream;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -17,27 +20,34 @@ import java.util.Date;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class LoggerCons implements ILogger {
+public class MTLoggerCons implements ILogger {
 
     private final LinkedBlockingQueue<String> cola;
     private CountDownLatch latch;
     private int   level = 0x3F;
     private Color color;
     private PrintStream out = System.out;
+    private IMTLogger logger;
+    private MTEnv env;
 
-    public LoggerCons() {
-        this.cola = CAMotor.getInstance().getQLog();
-        this.latch = latch;
-        //level = ConfigFramework.getInstance().level;
+    BufferedWriter buff;
+    FileWriter log;
+
+    public MTLoggerCons(MTEnv env, IMTLogger logger) {
+        this.cola   = env.getQLog();
+        this.logger = logger;
+        this.env    = env;
     }
     @Override
     public void run() {
-        long mark = 0L;
+        Thread.currentThread().setName("logger");
+        openLogFile();
+        long mark = 1L;
 
         try {
-            while (mark >= 0 || mark < Long.MAX_VALUE) {
+            while (true) {
                 String msg = cola.take();
-                String[] toks = msg.split(CAMotor.TOK);
+                String[] toks = msg.split(env.TOK);
                 mark = Long.parseLong(toks[0]);
                 if (mark < 0 || mark == Long.MAX_VALUE) break;
                 int type = (int) mark;
@@ -58,8 +68,10 @@ public class LoggerCons implements ILogger {
             }
         } catch (InterruptedException e) {
             System.out.println("Excepcion del logger");
+            closeLogger();
             Thread.currentThread().interrupt();
         }
+        closeLogger();
     }
     private void print(String fmt, Object... args) {
         String msg = String.format(fmt, args);
@@ -68,5 +80,29 @@ public class LoggerCons implements ILogger {
     private static String getPrfx() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         return dateFormat.format(new Date()) + " - ";
+    }
+    private void openLogFile() {
+        try {
+            File dir = MFiles.createTempSubDir("mt");
+            String name = env.getAppName() == null ? "mt" : env.getAppName();
+            log = MFiles.createAppendFile(dir, name + ".log", "rw-rw-rw-");
+
+//            buff = Files.newBufferedWriter(file);
+//            log = new PrintWriter(buff);
+        } catch (Exception e) {
+            System.err.println("Error creando log file");
+            System.err.println(e.getLocalizedMessage());
+        };
+    }
+    private void closeLogger() {
+        try {
+            if (log != null)  log.close();
+//            if (buff != null) buff.close();
+        } catch (Exception ex) {
+            // Do nothing
+        } finally {
+            log = null;
+//            buff = null;
+        }
     }
 }
