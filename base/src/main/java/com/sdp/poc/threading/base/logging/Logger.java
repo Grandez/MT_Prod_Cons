@@ -1,10 +1,8 @@
-package com.sdp.poc.threading.base.msg;
+package com.sdp.poc.threading.base.logging;
 /**
  * Logger via cola
  * Se ha preferido usar solo Logger para evitar confusiones, realmente es un productor
  */
-
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class Logger {
 

@@ -1,4 +1,4 @@
-package com.sdp.poc.threading.test.core;
+package com.sdp.poc.threading.test.base;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -14,8 +14,8 @@ public abstract class ThreadBase extends Thread {
         String[] toks = tname.split("-");
         Thread.currentThread().setName(proceso + "-" + String.format("%03d", Integer.parseInt(toks[toks.length - 1])));
     }
-    ThreadBase() {}
-    ThreadBase(CountDownLatch latch) {
+    public ThreadBase() {}
+    public ThreadBase(CountDownLatch latch) {
         this.latch = latch;
     }
     public String getNombre() {

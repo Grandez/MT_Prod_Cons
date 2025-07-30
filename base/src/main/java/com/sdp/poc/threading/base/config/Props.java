@@ -1,6 +1,6 @@
 package com.sdp.poc.threading.base.config;
 
-import com.sdp.poc.threading.base.msg.Logger2;
+import com.sdp.poc.threading.base.logging.CLogger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,8 +15,8 @@ public class Props {
         try {
             props.load(new FileInputStream(appConfigPath));
         } catch (IOException e) {
-            Logger2.warning("Props: No se ha podido cargar el fichero de propiedades: " + basename);
-            Logger2.warning("Props: " + e.getLocalizedMessage());
+            CLogger.warning("Props: No se ha podido cargar el fichero de propiedades: " + basename);
+            CLogger.warning("Props: " + e.getLocalizedMessage());
         }
         return props;
     }

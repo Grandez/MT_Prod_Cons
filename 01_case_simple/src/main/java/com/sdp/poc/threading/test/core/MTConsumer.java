@@ -1,13 +1,16 @@
 package com.sdp.poc.threading.test.core;
 
-import com.sdp.poc.threading.base.msg.Logger2;
+import com.sdp.poc.threading.base.logging.CLogger;
+import com.sdp.poc.threading.test.base.CAMT;
+import com.sdp.poc.threading.test.base.ThreadBase;
+import com.sdp.poc.threading.test.interfaces.IMTCA;
 import com.sdp.poc.threading.test.interfaces.IMTConsumer;
 
 public class MTConsumer<Long> extends ThreadBase implements Runnable {
 
     IMTConsumer consumer;
-    MTEnv env;
-    public MTConsumer(MTEnv env, IMTConsumer consumer) {
+    IMTCA env;
+    public MTConsumer(IMTCA env, IMTConsumer consumer) {
         super(env.getLatch());
         this.env = env;
         this.consumer = consumer;
@@ -19,7 +22,7 @@ public class MTConsumer<Long> extends ThreadBase implements Runnable {
         long msg;
         boolean rc = true;
         setThreadName("cons");
-        Logger2.info("Iniciando hilo " + getNombre());
+        CLogger.info("Iniciando hilo " + getNombre());
         try {
             while (true) {
                 msg = (long) env.getQueue().take();
@@ -27,9 +30,9 @@ public class MTConsumer<Long> extends ThreadBase implements Runnable {
                 consumer.consumir(msg);
             }
         } catch (InterruptedException e) {
-            Logger2.info(" Interrumpido");
+            CLogger.info(" Interrumpido");
         }
-        Logger2.info(" Finalizado");
+        CLogger.info(" Finalizado");
         env.getLatch().countDown();
     }
     protected void setThreadName () { setThreadName(this.getClass().getSimpleName()); }

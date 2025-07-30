@@ -1,8 +1,6 @@
 package com.sdp.poc.threading.core;
 
-import com.sdp.poc.threading.base.msg.QLogger;
 import com.sdp.poc.threading.config.CAMotor;
-import com.sdp.poc.threading.config.Commarea;
 
 /**
  * ESte hilo se encarga de matar al resto transcurrido cierto tiempo maximo de ejecucion

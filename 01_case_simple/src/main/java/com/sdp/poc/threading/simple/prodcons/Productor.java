@@ -1,15 +1,15 @@
 package com.sdp.poc.threading.simple.prodcons;
 
-import com.sdp.poc.threading.simple.base.CA;
-import com.sdp.poc.threading.interfaces.IMTProducer;
+import com.sdp.poc.threading.simple.base.CASimple;
+import com.sdp.poc.threading.test.interfaces.IMTProducer;
 
 public class Productor implements IMTProducer {
-    CA ca;
     int last = 0;
-    int max = 5;
+    int max = 1000;
+    CASimple ca;
     public Productor() {
-        ca = CA.getInstance();
-        // max = ca.getItems();
+        ca = CASimple.getInstance();
+        max = ca.getItems();
     }
     @Override
     public Long producir() {

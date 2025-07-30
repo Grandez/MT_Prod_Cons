@@ -5,7 +5,7 @@ package com.sdp.poc.threading.core;
  * El proceso acabara cuando se reciba un mensaje tipo -1
  */
 
-import com.sdp.poc.threading.base.msg.Color;
+import com.sdp.poc.threading.base.logging.Color;
 import com.sdp.poc.threading.config.CAMotor;
 import com.sdp.poc.threading.interfaces.ILogger;
 

@@ -1,4 +1,4 @@
-package com.sdp.poc.threading.base.msg;
+package com.sdp.poc.threading.base.logging;
 
 public enum Color {
     RESET  ("\033[0m"   )

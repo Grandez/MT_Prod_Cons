@@ -1,15 +1,14 @@
-package com.sdp.poc.threading.test.base;
+package com.sdp.poc.threading.base.logging;
 
-public enum MSG {
-    SUMMARY("SMR02000", "%ld;%ld;%d;%d;%d")
-    ;
-
+public class MSG {
     private final String code;
     private final String fmt;
+    private final String desc;
 
-    MSG(String code, String fmt) {
+    MSG(String code, String fmt, String desc) {
         this.code = code;
         this.fmt = fmt;
+        this.desc = desc;
     }
 
     public String getCode() { return code; }

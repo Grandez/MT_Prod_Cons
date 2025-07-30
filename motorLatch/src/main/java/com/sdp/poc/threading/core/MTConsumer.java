@@ -1,6 +1,5 @@
 package com.sdp.poc.threading.core;
 
-import com.sdp.poc.threading.base.msg.Logger2;
 import com.sdp.poc.threading.config.CAMotor;
 import com.sdp.poc.threading.interfaces.IMTConsumer;
 

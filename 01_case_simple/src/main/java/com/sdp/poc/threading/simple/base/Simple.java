@@ -3,29 +3,56 @@ package com.sdp.poc.threading.simple.base;
 import com.sdp.poc.threading.base.config.CLP;
 import com.sdp.poc.threading.base.config.CLP_Parameter;
 import com.sdp.poc.threading.base.config.CLP_TYPE;
+import com.sdp.poc.threading.base.logging.QLogger;
+import com.sdp.poc.threading.base.logging.QLoggerProd;
+import com.sdp.poc.threading.base.system.Shutdown;
 import com.sdp.poc.threading.simple.prodcons.Consumer;
-import com.sdp.poc.threading.simple.prodcons.Logger;
 import com.sdp.poc.threading.simple.prodcons.Productor;
 import com.sdp.poc.threading.test.core.Motor;
 
 import java.util.*;
 
 public class Simple {
-    public Simple() {
-    }
+    private CASimple ca;
+    private QLoggerProd logger;
+
     public static void main(String[] args) {
         Simple simple = new Simple();
         simple.run(args);
     }
     private void run(String[] args) {
-        Properties props = parseParms(args);
-        props.put("appName", "simple");
-        CA ca = CA.getInstance();
-        ca.setItems((String) props.get("items"));
+        try {
+            appInit(args);
 
-        Motor motor = new Motor(props);
-        motor.run(Productor.class, Consumer.class, Logger.class);
+            Motor motor = new Motor(ca);
+            motor.run(Productor.class, Consumer.class);
+            appEnd();
+
+        } catch (SecurityException se) {
+           System.err.println("Control-c pulsado");
+        } finally {
+            appEnd();
+        }
+
     }
+    private void appInit(String[] args) {
+        Shutdown.setHook();
+        QLogger.start("simple");
+        ca = CASimple.getInstance("simple");
+        ca.setProperties(parseParms(args));
+        ca.setAppName("simple");
+        logger = QLogger.getLogger(ca);
+    }
+    private void appEnd() {
+        logger.msg("SMR01000", System.currentTimeMillis() - ca.getBeg()
+                                  , ca.getRC()
+                                  , ca.getInput(), ca.getOutput(), ca.getErrors()
+                                  , ca.getNumThreads(),ca.getChunk(),ca.getTimeout()
+        );
+        QLogger.stop();
+        System.exit(ca.getRC());
+    }
+
     private Properties parseParms(String[] args) {
         Map<String, CLP_Parameter> options = new HashMap<>();
 

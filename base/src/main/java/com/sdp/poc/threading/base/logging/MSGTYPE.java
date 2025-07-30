@@ -1,10 +1,10 @@
-package com.sdp.poc.threading.test.base;
+package com.sdp.poc.threading.base.logging;
 
 public enum MSGTYPE {
-     MSG(0x00)
-    ,ERR(0x01)
-    ,NFO(0x02)
-    ,WAR(0x04)
+     MSG(0x04)
+    ,ERR(0x08)
+    ,NFO(0x10)
+    ,WAR(0x20)
     ;
     private final int value;
 
