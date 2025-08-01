@@ -1,0 +1,11 @@
+com\sdp\poc\threading\mtlatch\interfaces\IMTConsumer.class
+com\sdp\poc\threading\mtlatch\interfaces\IMTProducer.class
+com\sdp\poc\threading\mtlatch\core\Timer.class
+com\sdp\poc\threading\mtlatch\core\MTConsumer.class
+com\sdp\poc\threading\mtlatch\core\MTProducer.class
+com\sdp\poc\threading\mtlatch\core\Motor.class
+com\sdp\poc\threading\mtlatch\base\CAMT.class
+com\sdp\poc\threading\mtlatch\base\ThreadBase.class
+com\sdp\poc\threading\mtlatch\exceptions\ProdConException.class
+com\sdp\poc\threading\mtlatch\interfaces\IMTCA.class
+com\sdp\poc\threading\mtlatch\interfaces\IMTLogger.class
