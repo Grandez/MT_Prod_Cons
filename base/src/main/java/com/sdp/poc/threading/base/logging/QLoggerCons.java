@@ -39,11 +39,8 @@ public class QLoggerCons extends QLoggerBase implements Runnable {
                 String msg = qlog.take();
                 String[] toks = msg.split(SEP_TOK);
                 mark = Long.parseLong(toks[0]);
-                System.out.println("Recibe: " + msg);
-                if (mark < 0 || mark == Long.MAX_VALUE) {
-                    System.out.println("Recibe el fin del log");
-                    break;
-                }
+//                System.out.println("Recibe: " + msg);
+                if (mark < 0 || mark == Long.MAX_VALUE) break;
 
                 mark = checkConsole(mark);
                 write2log(msg);

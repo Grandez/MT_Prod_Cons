@@ -1,5 +1,6 @@
 package com.sdp.poc.threading.core;
 
+import com.sdp.poc.threading.base.logging.CLogger;
 import com.sdp.poc.threading.config.CAMotor;
 import com.sdp.poc.threading.interfaces.IMTProducer;
 
@@ -16,7 +17,7 @@ public class MTProducer extends ThreadBase  implements Runnable {
         Long msg;
         setThreadName("Prod");
 
-        Logger2.info("Iniciando hilo " + getName());
+        CLogger.info("Iniciando hilo " + getName());
         PriorityBlockingQueue<Long> q = CAMotor.getInstance().getQueue();
         msg = (Long) producer.producir();
         while (msg > 0) {
@@ -24,7 +25,7 @@ public class MTProducer extends ThreadBase  implements Runnable {
            q.put(msg);
            msg = (Long) producer.producir();
         }
-        Logger2.info(" Finaliza Producer");
+        CLogger.info(" Finaliza Producer");
     }
 
 }

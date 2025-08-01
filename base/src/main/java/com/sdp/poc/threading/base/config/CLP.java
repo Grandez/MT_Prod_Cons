@@ -34,18 +34,24 @@ public class CLP {
             case STRING: props.put(parm.name, args[idx]); break;
         }
     }
-    private static int checkInt(String[] args, int idx) {
+    private static String checkInt(String[] args, int idx) {
         try {
-            return Integer.parseInt(args[idx]);
+            Integer n = Integer.parseInt(args[idx]);
+            return n.toString();
         } catch (NumberFormatException ex) {
             CLogger.error(4, "El valor para el parametro: " + args[idx-1] + ".No es entero");
         }
-        return 0;
+        return null;
     }
-    private static int checkPInt(String[] args, int idx) {
-       int value = checkInt(args, idx);
-       if (value < 1) CLogger.error(4, "El valor para el parametro: " + args[idx-1] + ".No es valido");
-       return value;
+    private static String checkPInt(String[] args, int idx) {
+        try {
+            Integer n = Integer.parseInt(args[idx]);
+            if (n < 1) CLogger.error(4, "El valor para el parametro: " + args[idx-1] + ".No es valido");
+            return n.toString();
+        } catch (NumberFormatException ex) {
+            CLogger.error(4, "El valor para el parametro: " + args[idx-1] + ".No es entero");
+        }
+        return null;
     }
 
 }

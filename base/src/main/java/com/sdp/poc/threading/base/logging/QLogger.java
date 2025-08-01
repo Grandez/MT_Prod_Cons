@@ -18,10 +18,8 @@ public class QLogger extends QLoggerBase {
         // Controlar que ya este hecho
         if (thrLog == null) return;
         try {
-            System.out.println("Pone el fin");
             qlog.put(String.valueOf(Long.MAX_VALUE));
             thrLog.join();
-            System.out.println("Sale del join");
         } catch (InterruptedException e) {
             System.err.println("DEV: QLog InterruptedException");
         } finally {

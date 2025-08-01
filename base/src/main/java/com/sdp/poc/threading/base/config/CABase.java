@@ -1,6 +1,6 @@
 package com.sdp.poc.threading.base.config;
 
-import com.sdp.poc.threading.base.ICABase;
+import com.sdp.poc.threading.base.interfaces.ICABase;
 import com.sdp.poc.threading.base.system.PID;
 
 public class CABase implements ICABase {
@@ -14,13 +14,14 @@ public class CABase implements ICABase {
     private static class CABaseInner    { private static final CABase INSTANCE = new CABase(); }
     public  static CABase getInstance() { return CABase.CABaseInner.INSTANCE; }
 
-    public String getAppName() { return appName; }
-    public int    getRC()      { return rc;      }
-    public Long   getPid()     { return pid;     }
-    public Long   getBeg()     { return beg;     }
-    public Long   getInput()   { return in;      }
-    public Long   getOutput()  { return out;     }
-    public Long   getErrors()  { return err;     }
+    public String getAppName()  { return appName; }
+    public int    getRC()       { return rc;      }
+    public Long   getPid()      { return pid;     }
+    public Long   getBeg()      { return beg;     }
+    public Long   getInput()    { return in;      }
+    public Long   getOutput()   { return out;     }
+    public Long   getErrors()   { return err;     }
+    public void   setRC(int rc) { this.rc = rc;   }
 
     public void setAppName (String appName) { this.appName = appName; }
 

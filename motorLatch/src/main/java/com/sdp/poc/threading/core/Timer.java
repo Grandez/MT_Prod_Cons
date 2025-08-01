@@ -1,5 +1,6 @@
 package com.sdp.poc.threading.core;
 
+import com.sdp.poc.threading.base.logging.CLogger;
 import com.sdp.poc.threading.config.CAMotor;
 
 /**
@@ -20,19 +21,19 @@ public class Timer extends ThreadBase {
         @Override
         public void run() {
             //Commarea cfg = Commarea.getInstance();
-            QLogger.info("Hilo de tiempo");
+            CLogger.info("Hilo de tiempo");
             try {
 //                while (!isInterrupted()) {  // El hilo sigue ejecutándose hasta que se interrumpe
-                QLogger.info("Hilo de tiempo en espera ");
+                CLogger.info("Hilo de tiempo en espera ");
 //                Thread.sleep(((cfg.timer * 60) - 6) * 1000);  // El hilo está durmiendo, y podría ser interrumpido
                 Thread.currentThread().sleep(ca.getTimeout() * 1000);  // El hilo está durmiendo, y podría ser interrumpido
-                QLogger.info("Hilo de tiempo despierta ");
+                CLogger.info("Hilo de tiempo despierta ");
                 for (long l = 0; l < ca.getNumThreads(); l++) ca.qdat.put(ca.ENDI); // Notificar fin hilos
 //                ca.qlog.put(Commarea.ENDS);
                 thread.interrupt();
 //                }
             } catch (InterruptedException e) {
-                QLogger.info("El hilo fue interrumpido mientras estaba dormido.");
+                CLogger.info("El hilo fue interrumpido mientras estaba dormido.");
                 // Si el hilo está interrumpido, podemos hacer algo aquí, como finalizarlo.
                 Thread.currentThread().interrupt();  // Restablecer el estado de interrupción
             }

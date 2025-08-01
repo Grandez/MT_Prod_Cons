@@ -1,7 +1,7 @@
 package com.sdp.poc.threading.simple.prodcons;
 
 import com.sdp.poc.threading.simple.base.CASimple;
-import com.sdp.poc.threading.test.interfaces.IMTProducer;
+import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;
 
 public class Productor implements IMTProducer {
     int last = 0;
@@ -15,6 +15,7 @@ public class Productor implements IMTProducer {
     public Long producir() {
         last++;
         if (last > max) return null;
+        ca.read();
         return last + 0L;
     }
 }

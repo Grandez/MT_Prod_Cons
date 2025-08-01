@@ -1,5 +1,6 @@
 package com.sdp.poc.threading.core;
 
+import com.sdp.poc.threading.base.logging.CLogger;
 import com.sdp.poc.threading.config.CAMotor;
 import com.sdp.poc.threading.interfaces.IMTConsumer;
 
@@ -19,7 +20,7 @@ public class MTConsumer extends ThreadBase  implements Runnable {
         Long msg = 0L;
         boolean rc = true;
         setThreadName("cons");
-        Logger2.info("Iniciando hilo " + getNombre());
+        CLogger.info("Iniciando hilo " + getNombre());
         PriorityBlockingQueue<Long> q = CAMotor.getInstance().getQueue();
         try {
             do {
@@ -30,9 +31,9 @@ public class MTConsumer extends ThreadBase  implements Runnable {
                 rc = checkEnd(msg);
             } while (rc);
         } catch (InterruptedException e) {
-            Logger2.info(" Interrumpido");
+            CLogger.info(" Interrumpido");
         }
-        Logger2.info(" Finalizado");
+        CLogger.info(" Finalizado");
         this.latch.countDown();
     }
     protected void setThreadName () { setThreadName(this.getClass().getSimpleName()); }

@@ -6,8 +6,8 @@ package com.sdp.poc.threading.simple.base;
  * - CABase si no lo es
  */
 
-import com.sdp.poc.threading.test.base.CAMT;
-import com.sdp.poc.threading.test.interfaces.IMTCA;
+import com.sdp.poc.threading.mtlatch.base.CAMT;
+import com.sdp.poc.threading.mtlatch.interfaces.IMTCA;
 
 import java.util.Properties;
 
@@ -21,12 +21,12 @@ public class CASimple extends CAMT<Long> implements IMTCA {
         CASimple.CASimpleInner.INSTANCE.setAppName(app);
         return CASimple.CASimpleInner.INSTANCE;
     }
-    public void setProperties(Properties props) { this.props = props; }
+    public void setProperties(Properties props) {
+        this.props = props;
+        String value = props.get("items").toString();
+        if (value != null) items = Integer.parseInt(value);
+    }
     public Properties getCustomProps()          { return props; }
 
-    public int getItems() {
-        Integer max = (Integer) props.get("items");
-        if (max != null) items = max;
-        return items;
-    }
+    public int getItems() { return items; }
 }

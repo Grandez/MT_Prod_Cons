@@ -16,6 +16,7 @@ package com.sdp.poc.threading.core;
  */
 
 import com.sdp.poc.threading.base.config.Props;
+import com.sdp.poc.threading.base.logging.CLogger;
 import com.sdp.poc.threading.config.CAMotor;
 import com.sdp.poc.threading.interfaces.ICommarea;
 import com.sdp.poc.threading.interfaces.IMTConsumer;
@@ -113,7 +114,7 @@ public class Motor {
         Thread log = new Thread(new LoggerCons());
         log.setName("Logger");
         log.start();
-        QLogger.setQueue(ca.getQLog());
+        //QLogger.setQueue(ca.getQLog());
         return log;
     }
     // Arranca el monitor de tiempo
@@ -132,7 +133,7 @@ public class Motor {
             value = props.getProperty(prfx == null ? "timeout" : prfx + ".timeout");
             if (value != null) ca.setTimeout(Integer.parseInt(value));
         } catch (NumberFormatException ex) {
-            Logger2.warning("Ignorado valor del atributo no numerico: " + value);
+            CLogger.warning("Ignorado valor del atributo no numerico: " + value);
         }
     }
 }
