@@ -17,7 +17,7 @@ package com.sdp.poc.threading.core;
 
 import com.sdp.poc.threading.base.config.Props;
 import com.sdp.poc.threading.base.logging.CLogger;
-import com.sdp.poc.threading.config.CAMotor;
+import com.sdp.poc.threading.config.CAMT;
 import com.sdp.poc.threading.interfaces.ICommarea;
 import com.sdp.poc.threading.interfaces.IMTConsumer;
 import com.sdp.poc.threading.interfaces.IMTProducer;
@@ -31,7 +31,7 @@ import java.util.concurrent.PriorityBlockingQueue;
 public class Motor {
     CountDownLatch latch    = null;
     ExecutorService executor = null;
-    CAMotor ca;
+    CAMT ca;
 
     public Motor() { this(null, null, null); }
     public Motor(String file) {
@@ -42,7 +42,7 @@ public class Motor {
     }
     public Motor(Properties custom) {        this(null,null,custom);    }
     public Motor(String fConfig, String label, Properties custom) {
-        ca = CAMotor.getInstance();
+        ca = CAMT.getInstance();
         String fname = "mt.properties";
         if (fConfig != null) {
             fname = fConfig;
@@ -89,7 +89,7 @@ public class Motor {
 
             // Notificar que acaben
             for (long l = 0; l < ca.getNumThreads(); l++)
-                q.put(CAMotor.ENDT);
+                q.put(CAMT.ENDT);
             executor.shutdown();          // No mas hilos
             latch.await();
 
@@ -98,7 +98,7 @@ public class Motor {
                 thTimer.join();
             }
 
-            commarea.getQLog().put(CAMotor.ENDS);
+            commarea.getQLog().put(CAMT.ENDS);
             thLog.join();
 
         } catch (InterruptedException ex) {

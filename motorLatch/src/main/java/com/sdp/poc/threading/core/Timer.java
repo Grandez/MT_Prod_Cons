@@ -1,20 +1,20 @@
 package com.sdp.poc.threading.core;
 
 import com.sdp.poc.threading.base.logging.CLogger;
-import com.sdp.poc.threading.config.CAMotor;
+import com.sdp.poc.threading.config.CAMT;
 
 /**
  * ESte hilo se encarga de matar al resto transcurrido cierto tiempo maximo de ejecucion
  */
 public class Timer extends ThreadBase {
     private Thread thread;
-    private CAMotor ca;
+    private CAMT ca;
 
-    public Timer (Thread thread, CAMotor ca) {
+    public Timer (Thread thread, CAMT ca) {
         this.thread = thread;
         this.ca = ca;
     }
-    public Timer (String name, Thread thread, CAMotor ca) {
+    public Timer (String name, Thread thread, CAMT ca) {
         this(thread,ca);
         Thread.currentThread().setName(name);
     }

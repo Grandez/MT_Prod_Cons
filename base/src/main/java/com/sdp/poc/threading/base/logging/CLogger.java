@@ -1,11 +1,17 @@
 package com.sdp.poc.threading.base.logging;
 
+import com.sdp.poc.threading.base.config.CtxBase;
+import com.sdp.poc.threading.base.mask.RC;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CLogger {
+    private static CtxBase ca = null;
     public static void error(int rc, String msg) {
+        if (ca == null) ca = CtxBase.getInstance();
+        ca.rc |= RC.ERROR;
         System.err.println(Color.RED_BOLD + msg + Color.RESET);
         System.exit(rc);
     }
@@ -13,6 +19,8 @@ public class CLogger {
         print(msg);
     }
     public static void warning(String msg) {
+        if (ca == null) ca = CtxBase.getInstance();
+        ca.rc |= RC.WARNING;
         print(Color.BLUE_BOLD, msg);
     }
     public static void info(String msg) {

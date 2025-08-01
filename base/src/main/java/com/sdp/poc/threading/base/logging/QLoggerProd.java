@@ -4,11 +4,12 @@
  */
 package com.sdp.poc.threading.base.logging;
 
-import com.sdp.poc.threading.base.config.CABase;
+import com.sdp.poc.threading.base.config.CtxBase;
+import com.sdp.poc.threading.base.mask.RC;
 
 public class QLoggerProd extends QLoggerBase{
-    CABase ca;
-    public QLoggerProd(CABase ca) {
+    CtxBase ca;
+    public QLoggerProd(CtxBase ca) {
         this.ca = ca;
     }
     // Se escribe siempre
@@ -18,6 +19,11 @@ public class QLoggerProd extends QLoggerBase{
     public void info(int level, String code, Object ... parms) {
         if (checkLevel(MSGTYPE.NFO, level)) writeMessage(code, parms);
     }
+    public void warn(int level, String code, Object ... parms) {
+        ca.rc |= RC.WARNING;
+        if (checkLevel(MSGTYPE.NFO, level)) writeMessage(code, parms);
+    }
+
     private boolean checkLevel(MSGTYPE type, int level) {
         return true;
     }

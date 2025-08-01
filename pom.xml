@@ -11,9 +11,9 @@
 
     <modules>
         <module>base</module>
-<!--        <module>MotorLatch</module>-->
-        <module>01_case_simple</module>
         <module>MTLatch</module>
+        <module>01_case_simple</module>
+        <module>02_case_matrix</module>
     </modules>
 
     <properties>

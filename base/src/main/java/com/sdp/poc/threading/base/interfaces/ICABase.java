@@ -10,8 +10,21 @@ public interface ICABase {
     void addRead (long v);
     void addWrite(long v);
     void addErr  (long v);
+    long getBeg  ();
     long getRead ();
     long getWrite();
     long getErr  ();
+    int getRC();
+    long getInput();
+    long getOutput();
+    long getErrors();
+
+    void setNumThreads(int threads);
+    void setTimeout   (int timeout);
+    void setChunk     (int chunk);
+
+    int getNumThreads();
+    int getTimeout   ();
+    int getChunk     ();
 
 }

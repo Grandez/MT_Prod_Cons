@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Properties;
 
 public class CLP {
-    public static Properties parseParms(String[] args, Map<String, CLP_Parameter> options) {
-        Properties props = new Properties();
+    public static Props parseParms(String[] args, Map<String, CLP_Parameter> options) {
+        Props props = new Props();
         for (int i = 0; i < args.length; i++) {
             if (args[i].charAt(0) != '-') CLogger.error(4, "Parametro invalido: " + args[i]);
             String parm = args[i].substring(1);

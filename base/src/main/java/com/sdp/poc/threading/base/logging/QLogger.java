@@ -1,6 +1,6 @@
 package com.sdp.poc.threading.base.logging;
 
-import com.sdp.poc.threading.base.config.CABase;
+import com.sdp.poc.threading.base.config.CtxBase;
 
 public class QLogger extends QLoggerBase {
     private static Thread thrLog = null;
@@ -26,7 +26,7 @@ public class QLogger extends QLoggerBase {
             thrLog = null;
         }
     }
-    public static QLoggerProd getLogger(CABase ca) {
+    public static QLoggerProd getLogger(CtxBase ca) {
        return new QLoggerProd(ca);
     }
 }

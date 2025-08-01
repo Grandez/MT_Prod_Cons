@@ -1,7 +1,7 @@
 package com.sdp.poc.threading.core;
 
 import com.sdp.poc.threading.base.logging.CLogger;
-import com.sdp.poc.threading.config.CAMotor;
+import com.sdp.poc.threading.config.CAMT;
 import com.sdp.poc.threading.interfaces.IMTConsumer;
 
 import java.util.concurrent.CountDownLatch;
@@ -21,7 +21,7 @@ public class MTConsumer extends ThreadBase  implements Runnable {
         boolean rc = true;
         setThreadName("cons");
         CLogger.info("Iniciando hilo " + getNombre());
-        PriorityBlockingQueue<Long> q = CAMotor.getInstance().getQueue();
+        PriorityBlockingQueue<Long> q = CAMT.getInstance().getQueue();
         try {
             do {
                 System.out.println("En MTConsumer");

@@ -4,7 +4,7 @@ import java.util.Properties;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 
-public class CAMotor {
+public class CAMT {
     String name = "motor";
     int threads = 1;
     int timeout = 0;
@@ -22,23 +22,24 @@ public class CAMotor {
 
     private Properties customProps = new Properties();
 
-    private CAMotor() {}
+    private CAMT() {}
     private static class ConfigInner      {
-        private static final CAMotor INSTANCE = new CAMotor();
+        private static final CAMT INSTANCE = new CAMT();
     }
-    public  static CAMotor getInstance() { return CAMotor.ConfigInner.INSTANCE; }
-    public  static CAMotor getCustomInstance() {
-        return CAMotor.ConfigInner.INSTANCE;
+    public  static CAMT getInstance()       { return CAMT.ConfigInner.INSTANCE; }
+    public  static CAMT getCustomInstance() {
+        return CAMT.ConfigInner.INSTANCE;
     }
 
     public void setNumThreads(int threads) { this.threads = threads; }
     public void setTimeout   (int timeout) { this.timeout = timeout; }
+    public void setChunk     (int chunk)   { this.chunk   = chunk; }
 
     public int getNumThreads() { return threads; }
     public int getTimeout   () { return timeout; }
+    public int getChunk     () { return chunk;   }
 
     public Properties getCustomProps() {return customProps; }
     public PriorityBlockingQueue<Long> getQueue() { return qdat; }
-    public LinkedBlockingQueue<String> getQLog()  { return qlog; }
     public void setCustomProps(Properties props) { this.customProps = props; }
 }

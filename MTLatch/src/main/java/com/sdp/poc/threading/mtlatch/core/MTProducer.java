@@ -1,14 +1,15 @@
 package com.sdp.poc.threading.mtlatch.core;
 
+import com.sdp.poc.threading.base.config.CtxBase;
 import com.sdp.poc.threading.base.logging.CLogger;
 import com.sdp.poc.threading.mtlatch.base.ThreadBase;
-import com.sdp.poc.threading.mtlatch.interfaces.IMTCA;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;
 
 public class MTProducer<T> extends ThreadBase implements Runnable {
     IMTProducer producer;
-    IMTCA env;
-    public MTProducer(IMTCA env, IMTProducer producer) {
+    CtxBase     env;
+
+    public MTProducer(CtxBase env, IMTProducer producer) {
         super();
         this.producer = producer;
         this.env = env;

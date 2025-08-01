@@ -1,14 +1,14 @@
 package com.sdp.poc.threading.simple.prodcons;
 
-import com.sdp.poc.threading.simple.base.CASimple;
+import com.sdp.poc.threading.simple.core.CtxSimple;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;
 
 public class Productor implements IMTProducer {
     int last = 0;
     int max = 1000;
-    CASimple ca;
+    CtxSimple ca;
     public Productor() {
-        ca = CASimple.getInstance();
+        ca = CtxSimple.getInstance();
         max = ca.getItems();
     }
     @Override

@@ -1,19 +1,19 @@
 package com.sdp.poc.threading.mtlatch.core;
 
+import com.sdp.poc.threading.base.config.CtxBase;
 import com.sdp.poc.threading.base.logging.CLogger;
 import com.sdp.poc.threading.mtlatch.base.ThreadBase;
-import com.sdp.poc.threading.mtlatch.interfaces.IMTCA;
 
 /**
  * ESte hilo se encarga de matar al resto transcurrido cierto tiempo maximo de ejecucion
  */
 public class Timer extends ThreadBase {
     private Thread thrProd;
-    private IMTCA env;
+    private CtxBase env;
 
-    public Timer (Thread thrProd, IMTCA env) {
+    public Timer (Thread thrProd, CtxBase ctx) {
         this.thrProd = thrProd;
-        this.env = env;
+        this.env     = ctx;
         Thread.currentThread().setName("timer");
     }
     @Override

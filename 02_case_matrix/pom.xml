@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>01_case_simple</artifactId>
+    <artifactId>02_case_matrix</artifactId>
     <packaging>jar</packaging>
 
     <properties>
@@ -19,15 +19,21 @@
     </properties>
 
     <dependencies>
-       <dependency>
-           <groupId>com.sdp.poc</groupId>
-           <artifactId>base</artifactId>
-           <version>1.0.0</version>
-       </dependency>
+        <dependency>
+            <groupId>com.sdp.poc</groupId>
+            <artifactId>base</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
         <dependency>
             <groupId>com.sdp.poc</groupId>
             <artifactId>MTLatch</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sdp.poc</groupId>
+            <artifactId>base</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
@@ -37,20 +43,20 @@
     <build>
         <plugins>
             <!-- JAR NO FAT, necesita el ClassPath -->
-<!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.sdp.poc.threading.simple.MainmainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
--->
+            <!--
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-jar-plugin</artifactId>
+                            <version>3.3.0</version>
+                            <configuration>
+                                <archive>
+                                    <manifest>
+                                        <mainClass>com.sdp.poc.threading.simple.MainmainClass>
+                                    </manifest>
+                                </archive>
+                            </configuration>
+                        </plugin>
+            -->
 
             <!-- JAR FAT, NO necesita el ClassPath -->
             <plugin>
@@ -58,13 +64,13 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
-                    <finalName>01_case_simple</finalName>
+                    <finalName>02_case_matrix</finalName>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.sdp.poc.threading.simple.Main</mainClass>
+                            <mainClass>com.sdp.poc.threading.matrix.Main</mainClass>
                         </manifest>
                     </archive>
                     <appendAssemblyId>false</appendAssemblyId>

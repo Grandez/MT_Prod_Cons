@@ -5,6 +5,8 @@
     <file url="file://$APPLICATION_HOME_DIR$/bin/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/01_case_simple/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/01_case_simple/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/02_case_matrix/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/02_case_matrix/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/MTLatch/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/MTLatch/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/MotorLatch/src/main/java" charset="UTF-8" />

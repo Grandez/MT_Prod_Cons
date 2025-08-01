@@ -1,17 +1,17 @@
 package com.sdp.poc.threading.mtlatch.core;
 
+import com.sdp.poc.threading.base.config.CtxBase;
 import com.sdp.poc.threading.base.logging.CLogger;
 import com.sdp.poc.threading.mtlatch.base.ThreadBase;
-import com.sdp.poc.threading.mtlatch.interfaces.IMTCA;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTConsumer;
 
 public class MTConsumer<Long> extends ThreadBase implements Runnable {
 
     IMTConsumer consumer;
-    IMTCA env;
-    public MTConsumer(IMTCA env, IMTConsumer consumer) {
-        super(env.getLatch());
-        this.env = env;
+    CtxBase env;
+    public MTConsumer(CtxBase ctx, IMTConsumer consumer) {
+        super(ctx.getLatch());
+        this.env = ctx;
         this.consumer = consumer;
 
     }

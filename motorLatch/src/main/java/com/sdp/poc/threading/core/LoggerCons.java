@@ -6,7 +6,7 @@ package com.sdp.poc.threading.core;
  */
 
 import com.sdp.poc.threading.base.logging.Color;
-import com.sdp.poc.threading.config.CAMotor;
+import com.sdp.poc.threading.config.CAMT;
 import com.sdp.poc.threading.interfaces.ILogger;
 
 import java.io.PrintStream;
@@ -26,7 +26,7 @@ public class LoggerCons implements ILogger {
     private PrintStream out = System.out;
 
     public LoggerCons() {
-        this.cola = CAMotor.getInstance().getQLog();
+        this.cola = CAMT.getInstance().getQLog();
         this.latch = latch;
         //level = ConfigFramework.getInstance().level;
     }
@@ -37,7 +37,7 @@ public class LoggerCons implements ILogger {
         try {
             while (mark >= 0 || mark < Long.MAX_VALUE) {
                 String msg = cola.take();
-                String[] toks = msg.split(CAMotor.TOK);
+                String[] toks = msg.split(CAMT.TOK);
                 mark = Long.parseLong(toks[0]);
                 if (mark < 0 || mark == Long.MAX_VALUE) break;
                 int type = (int) mark;

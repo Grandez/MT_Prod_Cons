@@ -15,9 +15,9 @@ package com.sdp.poc.threading.mtlatch.core;
  *
  */
 
+import com.sdp.poc.threading.base.config.CtxBase;
 import com.sdp.poc.threading.base.config.Props;
 import com.sdp.poc.threading.base.logging.CLogger;
-import com.sdp.poc.threading.mtlatch.interfaces.IMTCA;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTConsumer;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;
 import com.sdp.poc.threading.base.logging.QLoggerProd;
@@ -28,7 +28,7 @@ import java.util.concurrent.Executors;
 
 public class Motor {
     ExecutorService executor = null;
-    IMTCA env;
+    CtxBase ctx;
     long    beg;
     QLoggerProd logger;
 
@@ -37,50 +37,50 @@ public class Motor {
     public Motor(String file, String label) {
         this(file, label, null);
     }
-    public Motor(IMTCA ca)                  { this(null,null, ca);    }
+    public Motor(CtxBase ca)                 { this(null,null, ca);    }
 
     /**
      * Constructor del motor de threading
      * @param fConfig Fichero de configuracion, si null mt.properties
      * @param label   Prefijo de las entradas de configuracion
-     * @param ca      Parametros pasados por linea de comandos en la interfaz
+     * @param ctx      Parametros pasados por linea de comandos en la interfaz
      */
-    public Motor(String fConfig, String label, IMTCA ca) {
+    public Motor(String fConfig, String label, CtxBase ctx) {
         String fname = "mt.properties";
         if (fConfig != null) {
             fname = fConfig;
             if (fConfig.indexOf('.') == -1) fname = fname + ".properties";
         }
-        env = ca;
+        this.ctx = ctx;
         loadPropsData(Props.load(fname), label);
-        loadPropsData(ca.getCustomProps(), null);
+        loadPropsData(ctx.getCustomProps(), null);
     }
 
     public void run(Class prodClass, Class consClass) {
         beg = System.currentTimeMillis();
         Thread thTimer;
         // Sumamos el productor
-        executor = Executors.newFixedThreadPool(env.getNumThreads() + 1);
+        executor = Executors.newFixedThreadPool(ctx.getNumThreads() + 1);
 
         try {
             // Arrancamos los consumidores
-            for (int i = 0; i < env.getNumThreads(); i++) {
+            for (int i = 0; i < ctx.getNumThreads(); i++) {
                 IMTConsumer iCons = (IMTConsumer) consClass.getConstructor().newInstance();
-                MTConsumer consumer = new MTConsumer(env, iCons);
+                MTConsumer consumer = new MTConsumer(ctx, iCons);
                 executor.execute(consumer); // Consumers
             }
 
             IMTProducer iprod = (IMTProducer) prodClass.getConstructor().newInstance();
-            Thread thrProd = new Thread(new MTProducer(env, iprod));
+            Thread thrProd = new Thread(new MTProducer(ctx, iprod));
 
             thTimer = startTimer(thrProd);
 
             executor.execute(thrProd);
             executor.shutdown();          // No mas hilos
-            env.getLatch().await();
+            ctx.getLatch().await();
 
             // Si habia timer, ha acabado antes de tiempo. Pararlo
-            if (env.getTimeout() > 0) {
+            if (ctx.getTimeout() > 0) {
                 thTimer.interrupt();
                 thTimer.join();
             }
@@ -95,8 +95,8 @@ public class Motor {
     }
     // Arranca el monitor de tiempo
     public Thread startTimer(Thread prod) {
-        if (env.getTimeout() == 0) return null;
-        Thread thr = new Thread(new Timer(prod, env));
+        if (ctx.getTimeout() == 0) return null;
+        Thread thr = new Thread(new Timer(prod, ctx));
         thr.start();
         return thr;
     }
@@ -105,11 +105,11 @@ public class Motor {
         String value;
         try {
             value = props.getProperty(prfx == null ? "threads" : prfx + ".threads");
-            if (value != null) env.setNumThreads(Integer.parseInt(value));
+            if (value != null) ctx.setNumThreads(Integer.parseInt(value));
             value = props.getProperty(prfx == null ? "timeout" : prfx + ".timeout");
-            if (value != null) env.setTimeout(Integer.parseInt(value));
+            if (value != null) ctx.setTimeout(Integer.parseInt(value));
             value = props.getProperty(prfx == null ? "chunk" : prfx + ".chunk");
-            if (value != null) env.setChunk(Integer.parseInt(value));
+            if (value != null) ctx.setChunk(Integer.parseInt(value));
         } catch (NumberFormatException ex) {
             CLogger.warning("Ignorado valor del atributo no numerico: "); //  + value);
         }
