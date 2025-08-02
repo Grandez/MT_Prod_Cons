@@ -12,18 +12,17 @@ public class Productor implements IMTProducer {
 
     public Productor() {
         ctx = CtxMatrix.getInstance();
-        Matrix m = ctx.getMatrix();
-        m.print();
+        m = ctx.getMatrix();
+        m.print("Source:");
     }
     @Override
     public Long producir() {
-        // El productor envia fila+columna %04d%04d
-        long id = (r * 10000) + ++c;
-        if (c == m.getNumCols()) {
+        if (++c == m.getNumCols()) {
             r++;
-            c = -1;
-            if (r == m.getNumRows()) return null;
+            c = 0;
         }
-        return id;
+        if (r == m.getNumRows()) return null;
+        String sid = String.format("%04d%04d", r, c);
+        return Long.parseLong(sid);
     }
 }

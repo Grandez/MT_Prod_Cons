@@ -1,14 +1,4 @@
-P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\simple\Simple.java
-P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\test\base\CAMT.java
-P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\simple\prodcons\Productor.java
-P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\test\core\Timer.java
-P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\simple\base\CASimple.java
-P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\test\core\MTProducer.java
-P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\test\interfaces\IMTCA.java
-P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\test\interfaces\IMTConsumer.java
-P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\test\base\ThreadBase.java
-P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\test\interfaces\IMTLogger.java
-P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\test\interfaces\IMTProducer.java
+P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\simple\Main.java
+P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\simple\core\CtxSimple.java
 P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\simple\prodcons\Consumer.java
-P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\test\core\MTConsumer.java
-P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\test\core\Motor.java
+P:\POC\MT_Prod_Cons\01_case_simple\src\main\java\com\sdp\poc\threading\simple\prodcons\Productor.java

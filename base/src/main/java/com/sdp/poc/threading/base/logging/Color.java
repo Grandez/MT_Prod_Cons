@@ -1,8 +1,8 @@
 package com.sdp.poc.threading.base.logging;
 
 public enum Color {
-    RESET  ("\033[0m"   )
-
+     RESET  ("\033[0m"   )
+    ,BOLD   ("\033[1m")
     ,BLACK  ("\033[0;30m")
     ,RED    ("\033[0;31m")
     ,GREEN  ("\033[0;32m")

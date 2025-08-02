@@ -16,12 +16,6 @@ public class CtxSimple extends CtxBase {
         CtxSimple.CASimpleInner.INSTANCE.setAppName(app);
         return CtxSimple.CASimpleInner.INSTANCE;
     }
-//    public void setProperties(Properties props) {
-//        this.props = props;
-//        String value = props.get("items").toString();
-//        if (value != null) items = Integer.parseInt(value);
-//    }
-//    public Properties getCustomProps()          { return props; }
-
-    public int getItems() { return items; }
+    public void setItems(int items) { this.items = items; }
+    public int getItems()           { return items; }
 }

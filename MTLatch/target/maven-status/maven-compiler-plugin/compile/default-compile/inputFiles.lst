@@ -1,4 +1,3 @@
-P:\POC\MT_Prod_Cons\MTLatch\src\main\java\com\sdp\poc\threading\mtlatch\interfaces\IMTCA.java
 P:\POC\MT_Prod_Cons\MTLatch\src\main\java\com\sdp\poc\threading\mtlatch\interfaces\IMTConsumer.java
 P:\POC\MT_Prod_Cons\MTLatch\src\main\java\com\sdp\poc\threading\mtlatch\base\ThreadBase.java
 P:\POC\MT_Prod_Cons\MTLatch\src\main\java\com\sdp\poc\threading\mtlatch\core\Timer.java
@@ -8,4 +7,3 @@ P:\POC\MT_Prod_Cons\MTLatch\src\main\java\com\sdp\poc\threading\mtlatch\core\Mot
 P:\POC\MT_Prod_Cons\MTLatch\src\main\java\com\sdp\poc\threading\mtlatch\exceptions\ProdConException.java
 P:\POC\MT_Prod_Cons\MTLatch\src\main\java\com\sdp\poc\threading\mtlatch\core\MTProducer.java
 P:\POC\MT_Prod_Cons\MTLatch\src\main\java\com\sdp\poc\threading\mtlatch\interfaces\IMTProducer.java
-P:\POC\MT_Prod_Cons\MTLatch\src\main\java\com\sdp\poc\threading\mtlatch\base\CAMT.java

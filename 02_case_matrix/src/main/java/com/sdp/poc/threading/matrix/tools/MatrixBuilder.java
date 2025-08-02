@@ -84,7 +84,7 @@ public class MatrixBuilder {
         int cont = 1;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                data[(row * cols) + col] = cont++;
+                data[(row * cols) + col] = cont++ % 1000; // Para evitar overflow
             }
         }
     }

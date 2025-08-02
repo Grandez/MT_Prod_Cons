@@ -9,22 +9,21 @@ import java.util.Date;
 
 public class CLogger {
     private static CtxBase ca = null;
-    public static void error(int rc, String msg) {
+    public static void error(String msg, Object ... args) {
         if (ca == null) ca = CtxBase.getInstance();
         ca.rc |= RC.ERROR;
-        System.err.println(Color.RED_BOLD + msg + Color.RESET);
-        System.exit(rc);
+        System.err.println(Color.RED_BOLD.getColor() + String.format(msg, args) + Color.RESET.getColor());
     }
     public static void debug(String msg) {
         print(msg);
     }
-    public static void warning(String msg) {
+    public static void warning(String msg, Object ...args) {
         if (ca == null) ca = CtxBase.getInstance();
         ca.rc |= RC.WARNING;
-        print(Color.BLUE_BOLD, msg);
+        print(Color.BLUE_BOLD, String.format(msg, args));
     }
     public static void info(String msg) {
-        print(Color.WHITE_BOLD, msg);
+        print(Color.BOLD, msg);
     }
 
     private static void print(Color color, String msg) {

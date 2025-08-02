@@ -10,11 +10,11 @@ public class Consumer implements IMTConsumer {
 
     public Consumer() {
         ctx = CtxMatrix.getInstance();
-        Matrix m = ctx.getMatrix();
+        m = ctx.getMatrix();
     }
 
     public void consumir(long msg) {
-        System.out.println(Thread.currentThread().getName() + " - Recibe " + msg);
+//        System.out.println(Thread.currentThread().getName() + " - Recibe " + msg);
 
         int row = (int) msg / 10000;
         int col = (int) msg % 10000;

@@ -6,6 +6,7 @@ import com.sdp.poc.threading.base.config.CLP_TYPE;
 import com.sdp.poc.threading.base.config.Props;
 import com.sdp.poc.threading.base.core.MainBase;
 import com.sdp.poc.threading.base.logging.QLoggerProd;
+import com.sdp.poc.threading.base.mask.RC;
 import com.sdp.poc.threading.matrix.core.CtxMatrix;
 import com.sdp.poc.threading.matrix.core.Matrix;
 import com.sdp.poc.threading.matrix.core.TYPES;
@@ -30,18 +31,19 @@ public class Main extends MainBase {
         List<Matrix> matrices;
         try {
             appInit("matrix", ctx, args);
+            Motor motor = new Motor(ctx);
             for (Matrix m : creaMatrices()) {
                 m.split(); // Fuerza a crear los arrays rows y cols
                 ctx.setMatrix(m);
-                ctx.setResult();
-                Motor motor = new Motor(ctx);
                 motor.run(Productor.class, Consumer.class);
+                ctx.getResult().print("Result:");
             }
         } catch (SecurityException se) {
+            ctx.rc |= RC.INTERRUPTED;
             System.err.println("Control-c pulsado");
         } catch (Exception se) {
+            ctx.rc |= RC.CRITICAL;
             System.err.println(se.getLocalizedMessage());
-            ctx.setRC(32);
         } finally {
             appEnd();
         }
@@ -55,6 +57,9 @@ public class Main extends MainBase {
         }
         return lista;
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // MainBase
     ///////////////////////////////////////////////////////////////////////////
 
     protected Props parseParms(String[] args) {
@@ -68,8 +73,11 @@ public class Main extends MainBase {
         if (props.get("help") != null) showHelp();
         return props;
     }
+
     protected void loadConfig() {
-        Properties props = ctx.getCustomProps();
+        // No hay fichero de propiedades. solo linea de comandos
+        Props props = ctx.getCommandLine();
+        ctx.setRows(props.getInteger("rows", ctx.getRows()));
     }
     protected void showHelp() {
         out.println("POC para analisis de procesos multihilo");

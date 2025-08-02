@@ -1,6 +1,7 @@
 package com.sdp.poc.threading.matrix.core;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Implementa una matriz
@@ -58,14 +59,29 @@ public class Matrix {
     public void set(int row, int col, int value) {
         data[(row * ncols) + col] = value;
     }
-    public void print() {
+
+    /**
+     * Saca por consola la matriz formateada
+     */
+    public void print() { print(""); }
+    public void print(String title) {
+        int size = getSize();
+        Integer aux;
         StringBuilder str = new StringBuilder();
 
+        System.out.println(title);
         for (int i = 0; i < data.length; i++) {
-            if (i % ncols == 0) str.append("\n");
-            str.append(String.format("%4d", data[i]));
+            if (i > 0 && i % ncols == 0) str.append("\n");
+            // Esto falla, aunque deberia estar soportado
+            //str.append(String.format("%*d", size, data[i]));
+
+            // Chapu con join y ncopies
+            aux = data[i];
+            int n = size - aux.toString().length() + 1;
+            String pad = String.join("", Collections.nCopies(n, " "));
+            str.append(String.format("%s%d", pad, data[i]));
         }
-        System.out.println(str);
+        System.out.println(str + "\n");
     }
     private void makeNull() {
         for (int row = 0; row < nrows; row++) {
@@ -74,5 +90,9 @@ public class Matrix {
             }
         }
     }
-
+    private int getSize() {
+        Integer max = 0;
+        for (int i = 0; i < data.length; i++) if (data[i] > max) max = data[i];
+        return max.toString().length();
+    }
 }

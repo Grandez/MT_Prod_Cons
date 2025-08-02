@@ -7,12 +7,12 @@ import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;
 
 public class MTProducer<T> extends ThreadBase implements Runnable {
     IMTProducer producer;
-    CtxBase     env;
+    CtxBase ctx;
 
-    public MTProducer(CtxBase env, IMTProducer producer) {
+    public MTProducer(CtxBase ctx, IMTProducer producer) {
         super();
         this.producer = producer;
-        this.env = env;
+        this.ctx = ctx;
     }
 
     public void run() {
@@ -22,14 +22,13 @@ public class MTProducer<T> extends ThreadBase implements Runnable {
         CLogger.info("Iniciando hilo " + getName());
         msg = producer.producir();
         while (msg != null) {
-           System.out.println(getNombre() + " - Escribe " + msg);
-           env.getQueue().put(msg);
+//           System.out.println(getNombre() + " - Escribe " + msg);
+           ctx.getQueue().put(msg);
            msg = producer.producir();
         }
         // Notificar que acaben
-        for (long l = 0; l < env.getNumThreads(); l++) env.getQueue().put(Long.MAX_VALUE);
-        env.getLatch().countDown();
-        CLogger.info(" Finaliza Producer");
+        for (long l = 0; l < ctx.getNumThreads(); l++) ctx.getQueue().put(Long.MAX_VALUE);
+        ctx.getLatch().countDown();
     }
 
 }

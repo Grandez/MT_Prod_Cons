@@ -2,6 +2,9 @@
  * Contexto de la aplicacion
  * Unico para toda la aplicacion
  *
+ * Esta aplicacion unicamente usa una matriz cuadrada (Matrix)
+ * y la eleva al cuadrado (orden de complejidad n cubo)
+ *
  */
 package com.sdp.poc.threading.matrix.core;
 
@@ -10,7 +13,7 @@ import com.sdp.poc.threading.base.config.CtxBase;
 public class CtxMatrix extends CtxBase {
     Matrix matrix;
     Matrix result;
-    int    rows = 10; // Default value
+    int    rows = 100; // Default value
 
     private CtxMatrix() {}
 
@@ -25,7 +28,7 @@ public class CtxMatrix extends CtxBase {
     }
 
     public Matrix getMatrix()       { return matrix;    }
-    public int    getRows()         { return rows;      }
     public Matrix getResult()       { return result;    }
+    public int    getRows()         { return rows;      }
     public void   setRows(int rows) { this.rows = rows; }
 }

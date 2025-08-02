@@ -8,8 +8,7 @@ package com.sdp.poc.threading.mtlatch.core;
  *  Se encarga de ejecutar el sistema de acuerdo con
  *  la parametrizacion de hilos
  *
- *  Primero se inicia Logger
- *  Luego Consumidores
+ *  Primero se inician Consumidores
  *  Luego Productor
  *  Se finaliza en orden inverso
  *
@@ -23,6 +22,7 @@ import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;
 import com.sdp.poc.threading.base.logging.QLoggerProd;
 
 import java.util.Properties;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -37,54 +37,53 @@ public class Motor {
     public Motor(String file, String label) {
         this(file, label, null);
     }
-    public Motor(CtxBase ca)                 { this(null,null, ca);    }
+    public Motor(CtxBase ca)                { this(null,null, ca);    }
 
     /**
      * Constructor del motor de threading
      * @param fConfig Fichero de configuracion, si null mt.properties
      * @param label   Prefijo de las entradas de configuracion
-     * @param ctx      Parametros pasados por linea de comandos en la interfaz
+     * @param ctx     Parametros pasados por linea de comandos en la interfaz
      */
     public Motor(String fConfig, String label, CtxBase ctx) {
-        String fname = "mt.properties";
-        if (fConfig != null) {
-            fname = fConfig;
-            if (fConfig.indexOf('.') == -1) fname = fname + ".properties";
-        }
         this.ctx = ctx;
-        loadPropsData(Props.load(fname), label);
-        loadPropsData(ctx.getCustomProps(), null);
+        loadPropsData(Props.load(getFileProperties(fConfig), label), label);
+        loadPropsData(ctx.getCommandLine(), null);
     }
 
+    @SuppressWarnings("unchecked")
     public void run(Class prodClass, Class consClass) {
         beg = System.currentTimeMillis();
         Thread thTimer;
-        // Sumamos el productor
-        executor = Executors.newFixedThreadPool(ctx.getNumThreads() + 1);
+
+        int threads = ctx.getNumThreads() + 1; // Sumamos el productor
+        ctx.setLatch(new CountDownLatch(threads));
+        executor = Executors.newFixedThreadPool(threads);
 
         try {
-            // Arrancamos los consumidores
+            // Arranca los consumidores
             for (int i = 0; i < ctx.getNumThreads(); i++) {
                 IMTConsumer iCons = (IMTConsumer) consClass.getConstructor().newInstance();
                 MTConsumer consumer = new MTConsumer(ctx, iCons);
                 executor.execute(consumer); // Consumers
             }
 
+            // Arranca el productor
             IMTProducer iprod = (IMTProducer) prodClass.getConstructor().newInstance();
             Thread thrProd = new Thread(new MTProducer(ctx, iprod));
 
+            // Arrancar el gestor de tiempo
             thTimer = startTimer(thrProd);
 
             executor.execute(thrProd);
             executor.shutdown();          // No mas hilos
-            ctx.getLatch().await();
+            ctx.getLatch().await();       // Esperar
 
             // Si habia timer, ha acabado antes de tiempo. Pararlo
             if (ctx.getTimeout() > 0) {
                 thTimer.interrupt();
                 thTimer.join();
             }
-            summary();
         } catch (InterruptedException ex) {
             System.err.println(ex.getLocalizedMessage());
         } catch(Exception ex) {
@@ -100,24 +99,19 @@ public class Motor {
         thr.start();
         return thr;
     }
-    private void loadPropsData(Properties props, String prfx) {
+    private void loadPropsData(Props props, String prfx) {
         if (props == null) return;
-        String value;
-        try {
-            value = props.getProperty(prfx == null ? "threads" : prfx + ".threads");
-            if (value != null) ctx.setNumThreads(Integer.parseInt(value));
-            value = props.getProperty(prfx == null ? "timeout" : prfx + ".timeout");
-            if (value != null) ctx.setTimeout(Integer.parseInt(value));
-            value = props.getProperty(prfx == null ? "chunk" : prfx + ".chunk");
-            if (value != null) ctx.setChunk(Integer.parseInt(value));
-        } catch (NumberFormatException ex) {
-            CLogger.warning("Ignorado valor del atributo no numerico: "); //  + value);
-        }
+        String p = prfx == null ? "" : prfx + ".";
+        ctx.setNumThreads(props.getInteger(p + "threads", ctx.getNumThreads()));
+        ctx.setNumThreads(props.getInteger(p + "timeout", ctx.getTimeout()));
+        ctx.setNumThreads(props.getInteger(p + "chunk",   ctx.getChunk()));
     }
-    private void summary() {
-//        logger.msg(MSG.SUMMARY, new Long(System.currentTimeMillis() - beg)
-//                              ,env.getNumThreads()
-//                              ,env.getChunk()
-//                              ,env.getRead());
+    private String getFileProperties (String fileProps) {
+        if (fileProps == null) {
+            String[] toks = getClass().getName().split("\\.");
+            fileProps = toks[toks.length - 3];
+        }
+        if (fileProps.indexOf('.') == -1) fileProps = fileProps + ".properties";
+        return fileProps;
     }
 }

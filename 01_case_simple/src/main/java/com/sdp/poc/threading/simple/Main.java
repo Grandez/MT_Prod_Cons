@@ -3,6 +3,7 @@ package com.sdp.poc.threading.simple;
 import com.sdp.poc.threading.base.config.CLP;
 import com.sdp.poc.threading.base.config.CLP_Parameter;
 import com.sdp.poc.threading.base.config.CLP_TYPE;
+import com.sdp.poc.threading.base.config.Props;
 import com.sdp.poc.threading.base.core.MainBase;
 import com.sdp.poc.threading.base.logging.QLoggerProd;
 import com.sdp.poc.threading.mtlatch.core.Motor;
@@ -15,7 +16,7 @@ import java.util.*;
 import static java.lang.System.out;
 
 public class Main extends MainBase {
-    private CtxSimple ca = CtxSimple.getInstance();
+    private CtxSimple ctx = CtxSimple.getInstance();
     private QLoggerProd logger;
 
     public static void main(String[] args) {
@@ -24,31 +25,38 @@ public class Main extends MainBase {
     }
     private void run(String[] args) {
         try {
-            appInit("simple", ca, args);
-            Motor motor = new Motor(ca);
+            appInit("simple", ctx, args);
+            Motor motor = new Motor(ctx);
             motor.run(Productor.class, Consumer.class);
         } catch (SecurityException se) {
            System.err.println("Control-c pulsado");
         } catch (Exception se) {
             System.err.println(se.getLocalizedMessage());
-            ca.setRC(32);
+            ctx.setRC(32);
         } finally {
             appEnd();
         }
 
     }
-     protected Properties parseParms(String[] args) {
+    ///////////////////////////////////////////////////////////////////////////
+    // MainBase
+    ///////////////////////////////////////////////////////////////////////////
+
+     protected Props parseParms(String[] args) {
         Map<String, CLP_Parameter> options = new HashMap<>();
 
         options.put("n", new CLP_Parameter("n", "items", CLP_TYPE.PINT));
         options.put("t", new CLP_Parameter("t", "threads", CLP_TYPE.PINT));
         options.put("e", new CLP_Parameter("e", "timeout", CLP_TYPE.PINT));
 
-        Properties props = CLP.parseParms(args, options);
+        Props props = CLP.parseParms(args, options);
         if (props.get("help") != null) showHelp();
         return props;
     }
-
+    protected void loadConfig() {
+        Props props = ctx.getCommandLine();
+        ctx.setItems(props.getInteger("items", ctx.getItems()));
+    }
     protected void showHelp() {
         out.println("POC para analisis de procesos multihilo");
         out.println("Simplemente saca un mensaje por consola");

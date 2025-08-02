@@ -1,35 +1,36 @@
 package com.sdp.poc.threading.base.config;
 
-import com.sdp.poc.threading.base.interfaces.ICABase;
 import com.sdp.poc.threading.base.system.PID;
 
-import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.PriorityBlockingQueue;
 
-public class CtxBase implements ICABase {
+public class CtxBase { // implements ICABase {
     private String appName = "NONAME";
     public  int    rc  = 0;
 
     private Long    pid;
     private Long    beg;
 
+    // Contadores
     private Long    in  = 0L;
     private Long    out = 0L;
     private Long    err = 0L;
 
+    // Parte Multihilo
     private int threads = 1;
     private int timeout = 0;
     private int chunk = 0;
+    private static PriorityBlockingQueue<Long> qdat = new PriorityBlockingQueue<Long>();
+    private static CountDownLatch latch;
 
+    // Parte Configuraciones
     protected Props props;
     protected Props customProps = new Props();
 
     private static class CABaseInner    { private static final CtxBase INSTANCE = new CtxBase(); }
     public  static CtxBase getInstance() { return CtxBase.CABaseInner.INSTANCE; }
 
-    private static PriorityBlockingQueue<Long> qdat = new PriorityBlockingQueue<Long>();
-    private static CountDownLatch latch;
 
     public String getAppName()  { return appName; }
     public int    getRC()       { return rc;      }
@@ -69,10 +70,9 @@ public class CtxBase implements ICABase {
     public long getWrite()       { return out; }
     public long getErr  ()       { return err; }
 
-    public void setProperties (Props props) { this.props = props; }
-    public void setCustomProps(Props props) { this.customProps = props; }
+    public void  setCommandLine(Props props) { this.customProps = props; }
+    public Props getCommandLine()            { return customProps; }
 
-    public Props getCustomProps()            { return customProps; }
     public PriorityBlockingQueue<Long> getQueue() { return qdat; }
     public CountDownLatch              getLatch() { return latch; }
     public void                        setLatch(CountDownLatch latch) { this.latch = latch; }

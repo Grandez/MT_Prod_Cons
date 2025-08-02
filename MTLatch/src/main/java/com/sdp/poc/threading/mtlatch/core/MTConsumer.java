@@ -8,10 +8,10 @@ import com.sdp.poc.threading.mtlatch.interfaces.IMTConsumer;
 public class MTConsumer<Long> extends ThreadBase implements Runnable {
 
     IMTConsumer consumer;
-    CtxBase env;
+    CtxBase ctx;
     public MTConsumer(CtxBase ctx, IMTConsumer consumer) {
         super(ctx.getLatch());
-        this.env = ctx;
+        this.ctx = ctx;
         this.consumer = consumer;
 
     }
@@ -24,15 +24,14 @@ public class MTConsumer<Long> extends ThreadBase implements Runnable {
         CLogger.info("Iniciando hilo " + getNombre());
         try {
             while (true) {
-                msg = (long) env.getQueue().take();
-                if (msg <= 0 || msg == java.lang.Long.MAX_VALUE) break;
+                msg = (long) ctx.getQueue().take();
+                if (msg < 0 || msg == java.lang.Long.MAX_VALUE) break;
                 consumer.consumir(msg);
             }
         } catch (InterruptedException e) {
             CLogger.info(" Interrumpido");
         }
-        // CLogger.info(" Finalizado");
-        env.getLatch().countDown();
+        ctx.getLatch().countDown();
     }
     protected void setThreadName () { setThreadName(this.getClass().getSimpleName()); }
     protected void setThreadName (String proceso) {
