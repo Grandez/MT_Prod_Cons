@@ -12,8 +12,9 @@
     <modules>
         <module>base</module>
         <module>MTLatch</module>
-        <module>01_case_simple</module>
-        <module>02_case_matrix</module>
+        <module>01_thread</module>
+        <module>02_simple</module>
+        <module>03_matrix</module>
     </modules>
 
     <properties>

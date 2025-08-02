@@ -6,17 +6,21 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="01_case_simple" />
-        <module name="02_case_matrix" />
-        <module name="motorLatch" />
+        <module name="02_simple" />
+        <module name="03_matrix" />
+        <module name="MotorLatch" />
         <module name="MTLatch" />
         <module name="base" />
+        <module name="01_thread" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="02_case_matrix" target="1.8" />
+      <module name="02_case_simple" target="1.8" />
       <module name="matrix" target="1.8" />
       <module name="motor" target="1.8" />
       <module name="motor (1)" target="1.8" />
+      <module name="motorLatch" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,6 +1,6 @@
 package com.sdp.poc.threading.mtlatch.core;
 
-import com.sdp.poc.threading.base.config.CtxBase;
+import com.sdp.poc.threading.base.CtxBase;
 import com.sdp.poc.threading.base.logging.CLogger;
 import com.sdp.poc.threading.mtlatch.base.ThreadBase;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;

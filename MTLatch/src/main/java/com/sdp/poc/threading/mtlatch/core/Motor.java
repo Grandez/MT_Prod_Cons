@@ -14,14 +14,12 @@ package com.sdp.poc.threading.mtlatch.core;
  *
  */
 
-import com.sdp.poc.threading.base.config.CtxBase;
-import com.sdp.poc.threading.base.config.Props;
-import com.sdp.poc.threading.base.logging.CLogger;
+import com.sdp.poc.threading.base.CtxBase;
+import com.sdp.poc.threading.base.parameters.Props;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTConsumer;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;
 import com.sdp.poc.threading.base.logging.QLoggerProd;
 
-import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -103,8 +101,8 @@ public class Motor {
         if (props == null) return;
         String p = prfx == null ? "" : prfx + ".";
         ctx.setNumThreads(props.getInteger(p + "threads", ctx.getNumThreads()));
-        ctx.setNumThreads(props.getInteger(p + "timeout", ctx.getTimeout()));
-        ctx.setNumThreads(props.getInteger(p + "chunk",   ctx.getChunk()));
+        ctx.setTimeout(props.getInteger(p + "timeout", ctx.getTimeout()));
+        ctx.setChunk(props.getInteger(p + "chunk",   ctx.getChunk()));
     }
     private String getFileProperties (String fileProps) {
         if (fileProps == null) {

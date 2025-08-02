@@ -1,6 +1,6 @@
 package com.sdp.poc.threading.base.logging;
 
-import com.sdp.poc.threading.base.config.CtxBase;
+import com.sdp.poc.threading.base.CtxBase;
 import com.sdp.poc.threading.base.mask.RC;
 
 import java.text.DateFormat;
