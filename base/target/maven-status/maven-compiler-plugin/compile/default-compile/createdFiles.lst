@@ -1,10 +1,13 @@
 com\sdp\poc\threading\base\parameters\CLP$1.class
 com\sdp\poc\threading\base\CtxBase.class
 com\sdp\poc\threading\base\parameters\CLP_TYPE.class
+com\sdp\poc\threading\base\templates\CtxTemplate.class
 com\sdp\poc\threading\base\otros\Operacion.class
 com\sdp\poc\threading\base\parameters\CLP_Parameter.class
 com\sdp\poc\threading\base\MainBase.class
+com\sdp\poc\threading\base\templates\CtxTemplate$CtxTemplateInner.class
 com\sdp\poc\threading\base\CtxBase$CABaseInner.class
 com\sdp\poc\threading\base\parameters\Props.class
 com\sdp\poc\threading\base\parameters\CLP.class
+com\sdp\poc\threading\base\templates\CtxTemplate$1.class
 com\sdp\poc\threading\base\datetime\Time.class

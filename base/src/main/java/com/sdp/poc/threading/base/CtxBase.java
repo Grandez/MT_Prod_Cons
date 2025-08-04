@@ -42,11 +42,9 @@ public class CtxBase { // implements ICABase {
     public long   getErrors()   { return err;     }
     public void   setRC(int rc) { this.rc = rc;   }
 
-    public void setNumThreads(int threads) {
-        this.threads = threads;
-    }
+    public void setNumThreads(int threads) { this.threads = threads; }
     public void setTimeout   (int timeout) { this.timeout = timeout; }
-    public void setChunk     (int chunk)   { this.chunk   = chunk; }
+    public void setChunk     (int chunk)   { this.chunk   = chunk;   }
 
     public int getNumThreads() { return threads; }
     public int getTimeout   () { return timeout; }
@@ -60,15 +58,15 @@ public class CtxBase { // implements ICABase {
     }
 
     // Metodos para los contadores
-    public void read()           { in++;       }
-    public void write()          { out++;      }
-    public void err()            { err++;      }
-    public void setRead (long v) { in   = v;   }
-    public void setWrite(long v) { out  = v;   }
-    public void setErr  (long v) { err  = v;   }
-    public void addRead (long v) { in  += v;   }
-    public void addWrite(long v) { out += v;   }
-    public void addErr  (long v) { err += v;   }
+    public synchronized void read()           { in++;       }
+    public synchronized void write()          { out++;      }
+    public synchronized void err()            { err++;      }
+    public synchronized void setRead (long v) { in   = v;   }
+    public synchronized void setWrite(long v) { out  = v;   }
+    public synchronized void setErr  (long v) { err  = v;   }
+    public synchronized void addRead (long v) { in  += v;   }
+    public synchronized void addWrite(long v) { out += v;   }
+    public synchronized void addErr  (long v) { err += v;   }
     public long getRead ()       { return in;  }
     public long getWrite()       { return out; }
     public long getErr  ()       { return err; }

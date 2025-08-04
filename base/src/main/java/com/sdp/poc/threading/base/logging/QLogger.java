@@ -18,7 +18,7 @@ public class QLogger extends QLoggerBase {
         // Controlar que ya este hecho
         if (thrLog == null) return;
         try {
-            qlog.put(String.valueOf(Long.MAX_VALUE));
+            qlog.put("end:" + Long.MAX_VALUE);
             thrLog.join();
         } catch (InterruptedException e) {
             System.err.println("DEV: QLog InterruptedException");

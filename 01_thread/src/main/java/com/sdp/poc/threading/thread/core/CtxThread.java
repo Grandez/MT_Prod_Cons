@@ -8,6 +8,7 @@ import com.sdp.poc.threading.base.CtxBase;
 
 public class CtxThread extends CtxBase {
     private Integer items = 1000;
+    private Integer threads = 1;
 
     private CtxThread() {}
     private static class CtxThreadInner { private static final CtxThread INSTANCE = new CtxThread(); }
@@ -16,6 +17,9 @@ public class CtxThread extends CtxBase {
         CtxThreadInner.INSTANCE.setAppName(app);
         return CtxThreadInner.INSTANCE;
     }
-    public void setItems(int items) { this.items = items; }
-    public int getItems()           { return items; }
+    public void setItems(int items)     { this.items = items; }
+    public int getItems()               { return items; }
+    public void setThreads(int threads) { this.threads = threads; }
+    public int getThreads()             { return threads; }
+
 }

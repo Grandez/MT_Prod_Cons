@@ -26,6 +26,7 @@ public class MTConsumer<Long> extends ThreadBase implements Runnable {
             while (true) {
                 msg = (long) ctx.getQueue().take();
                 if (msg < 0 || msg == java.lang.Long.MAX_VALUE) break;
+                ctx.write();
                 consumer.consumir(msg);
             }
         } catch (InterruptedException e) {

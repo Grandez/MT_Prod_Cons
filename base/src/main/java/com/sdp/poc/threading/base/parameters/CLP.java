@@ -16,11 +16,11 @@ public class CLP {
         Props props = new Props();
         try {
             for (int i = 0; i < args.length; i++) {
-                if (args[i].charAt(0) != '-') throw new InvalidArgumentException(badParm, args[i]);
-                String parm = args[i].substring(1);
+                if (args[i].substring(0,2).compareTo("--") != 0) throw new InvalidArgumentException(badParm, args[i]);
+                String parm = args[i].substring(2);
 
                 // Control de ayuda
-                if (parm.compareToIgnoreCase("H") == 0) {
+                if (parm.compareToIgnoreCase("HELP") == 0) {
                     props.put("help", 1);
                     return props;
                 }

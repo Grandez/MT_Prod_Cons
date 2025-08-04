@@ -23,6 +23,7 @@ public class MTProducer<T> extends ThreadBase implements Runnable {
         msg = producer.producir();
         while (msg != null) {
 //           System.out.println(getNombre() + " - Escribe " + msg);
+           ctx.read();
            ctx.getQueue().put(msg);
            msg = producer.producir();
         }

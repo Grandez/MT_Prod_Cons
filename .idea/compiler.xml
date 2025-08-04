@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="02_simple" />
         <module name="03_matrix" />
-        <module name="MotorLatch" />
         <module name="MTLatch" />
         <module name="base" />
         <module name="01_thread" />
@@ -20,6 +19,7 @@
       <module name="matrix" target="1.8" />
       <module name="motor" target="1.8" />
       <module name="motor (1)" target="1.8" />
+      <module name="MotorLatch" target="1.8" />
       <module name="motorLatch" target="1.8" />
     </bytecodeTargetLevel>
   </component>

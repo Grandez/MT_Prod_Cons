@@ -37,12 +37,11 @@ public class QLoggerCons extends QLoggerBase implements Runnable {
         try {
             while (true) {
                 String msg = qlog.take();
-                String[] toks = msg.split(SEP_TOK);
-                mark = Long.parseLong(toks[0]);
-//                System.out.println("Recibe: " + msg);
+                String[] toks = msg.split(":");
+                mark = Long.parseLong(toks[1]);
                 if (mark < 0 || mark == Long.MAX_VALUE) break;
 
-                mark = checkConsole(mark);
+//                mark = checkConsole(mark);
                 write2log(msg);
 
                 // MSGTYPE type = new MSGTYPE((int) mark);
